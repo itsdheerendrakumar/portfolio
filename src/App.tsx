@@ -36,22 +36,25 @@ const projects = [
     title: "Task Management",
     stack: "Full Stack (MERN), Socket.io, @dnd-kit, TanStack, ApexCharts",
     desc: "Built a collaborative workspace where teams can manage tasks using a drag-and-drop Kanban board and chat in real-time via Socket.io. I also integrated role-based access control (RBAC) and analytics dashboards to track progress, all backed by secure JWT auth.",
-    live: "#",
-    source: "#"
+    live: "https://task-management-frontend-opal-kappa.vercel.app/",
+    frontend: "https://github.com/itsdheerendrakumar/task-management-frontend",
+    backend: "https://github.com/itsdheerendrakumar/task-management-backend"
   },
   {
     title: "Online Job Portal",
     stack: "Full Stack (MERN), Cloudinary, RBAC",
     desc: "Architected multi-role panels with secure backend authentication, authorization, and Role-Based Access Control (RBAC). Integrated Cloudinary API for media storage.",
-    live: "#",
-    source: "#"
+    live: "https://job-portal-frontend-p3a9.vercel.app/",
+    frontend: "https://github.com/itsdheerendrakumar/jobPortalFrontend",
+    backend: "https://github.com/itsdheerendrakumar/jobPortalBackend"
   },
   {
     title: "Blog App",
     stack: "Full Stack (MERN)",
     desc: "Developed a full-stack platform featuring comprehensive RESTful CRUD operations and secure user authentication.",
-    live: "#",
-    source: "#"
+    live: "https://blog-frontend-eta-silk.vercel.app/",
+    frontend: "https://github.com/itsdheerendrakumar/BlogFrontend",
+    backend: "https://github.com/itsdheerendrakumar/BlogBackend"
   }
 ];
 
@@ -204,12 +207,30 @@ export default function App() {
                       <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">
                         {project.title}
                       </h3>
-                      <div className="flex items-center gap-4 text-sm font-medium">
-                        <a href={project.live} className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm font-medium">
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+                        >
                           Live <ArrowUpRight className="w-3 h-3" />
                         </a>
-                        <a href={project.source} className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
-                          Source <ArrowUpRight className="w-3 h-3" />
+                        <a
+                          href={project.frontend}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          Frontend Code <ArrowUpRight className="w-3 h-3" />
+                        </a>
+                        <a
+                          href={project.backend}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          Backend Code <ArrowUpRight className="w-3 h-3" />
                         </a>
                       </div>
                     </div>
