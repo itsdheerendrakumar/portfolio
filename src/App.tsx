@@ -137,13 +137,27 @@ export default function App() {
 
     const body = `Subject: ${subjectInput}\nFrom: ${name} (${email})\n\nMessage:\n${message}`;
 
-    const mailtoUrl = `mailto:dheerendra16kumar@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+      navigator.userAgent
+    );
+
+    if (isMobile) {
+      const mailtoUrl = `mailto:dheerendra16kumar@gmail.com?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      const link = document.createElement("a");
+      link.href = mailtoUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=dheerendra16kumar@gmail.com&su=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
+    }
 
     form.reset();
-
-    window.location.href = mailtoUrl;
   };
 
   return (
