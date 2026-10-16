@@ -121,6 +121,31 @@ function AnimatedBackground() {
 }
 
 export default function App() {
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = ((formData.get("name") as string) || "").trim();
+    const email = ((formData.get("email") as string) || "").trim();
+    const subjectInput = ((formData.get("subject") as string) || "").trim();
+    const message = ((formData.get("message") as string) || "").trim();
+
+    const tag = subjectInput.startsWith("[") && subjectInput.endsWith("]")
+      ? subjectInput
+      : `[${subjectInput}]`;
+    const subject = `${tag} Message from ${name}`;
+
+    const body = `Subject: ${subjectInput}\nFrom: ${name} (${email})\n\nMessage:\n${message}`;
+
+    const mailtoUrl = `mailto:dheerendra16kumar@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    form.reset();
+
+    window.location.href = mailtoUrl;
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground relative z-0">
       <AnimatedBackground />
@@ -333,7 +358,7 @@ export default function App() {
                 Feel free to reach out to me via email or use the contact form below.
               </p>
 
-              <form className="mb-12 space-y-4 max-w-md" action="mailto:dheerendra16kumar@gmail.com" method="POST" encType="text/plain">
+              <form className="mb-12 space-y-4 max-w-md" onSubmit={handleContactSubmit}>
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
                   <input id="name" name="name" type="text" required className="w-full px-3 py-2 bg-transparent border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" />
@@ -341,6 +366,10 @@ export default function App() {
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
                   <input id="email" name="email" type="email" required className="w-full px-3 py-2 bg-transparent border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="text-sm font-medium text-foreground">Subject</label>
+                  <input id="subject" name="subject" type="text" required placeholder="e.g. Job Opportunity, Project Inquiry" className="w-full px-3 py-2 bg-transparent border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
